@@ -6,26 +6,31 @@ var ko = require('knockout');
 function ViewModel(params) {
     var self = this;
 
-    // TODO: Setup everything needed to start listening for the event
-    /*
-    example:
-    // let's trigger after 1 second
-    self.timer = setInterval(function(){
-        params.trigger();
-    }, 1000);
-    */
-
     self.context = params.context;
 
     self.trigger = params.trigger;
+
+    self.index = params.index;
+
+    self.listener = function(inEvent){
+        // Handling keydown Event
+        var keycode;
+
+        if(window.event) { 
+            keycode = inEvent.keyCode;
+        } else if(e.which) { 
+            keycode = inEvent.which;
+        } 
+        if (keycode == 49 + self.index()) {
+            self.trigger();
+        }
+    };
+
+    document.addEventListener("keydown", self.listener, false);
 }
 
 ViewModel.prototype.dispose = function() {
-  // TODO: Teardown everything you setup to listen for the event
-  /*
-  example [continue]:
-  clearInterval(this.timer);
-  */
+    document.removeEventListener("keydown", this.listener, false);
 }
 
 ViewModel.prototype.id = 'system-event-selected-camera';
