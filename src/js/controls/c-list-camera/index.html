@@ -1,18 +1,15 @@
 <ul class="collection with-header z-depth-1">
-    <li class="collection-header cyan"><h5 class="white-text light">Camera</h5></li>
     
     <!-- ko foreach: items -->
     <!-- ko if: $index() % 3 == 0 -->
-        <div class="row">
+    <div class="row">
     <!-- /ko -->
-            <div class="col s4" data-bind="click: $parent.select">
-        <c-sharp params="url: $data['url'], auth: $data['auth'], username: $data['username'], password: $data['password']"></c-sharp>
-   
-            <c-system-event-selected-camera params="trigger: $parent.trigger.bind($data, 'system-event-selected-camera')"></c-system-event-selected-camera>
-            </div>
-    <!-- ko if: $index() % 3 != 0 -->
+        <div class="col s4" data-bind="click: $parent.select">
+            <c-sharp params="url: $data['url'], auth: $data['auth'], username: $data['username'], password: $data['password']"></c-sharp>
+            <c-system-event-selected-camera params="index: $index, trigger: $parent.trigger.bind($data, 'system-event-selected-camera')"></c-system-event-selected-camera>
         </div>
+    <!-- ko if: $index() % 3 != 0 -->
+    </div>
     <!-- /ko -->
-    <!-- /ko -->
-    
+    <!-- /ko --> 
 </ul>

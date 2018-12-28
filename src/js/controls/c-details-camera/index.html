@@ -1,26 +1,12 @@
 <div class="card z-depth-1">
-    <div class="card-image">
-        <ul class="card-image collection with-header">
-            <li class="collection-header cyan">
-                <h5 class="white-text light">Camera Details</h5>
-            </li>
-        </ul>
-    </div>
     <div class="card-content">
-        <div data-bind="if: item">
-        <strong>auth</strong>
-        <span data-bind="text: item()['auth']" style="white-space: pre-wrap;"></span><br>
-        <strong>name</strong>
-        <span data-bind="text: item()['name']" style="white-space: pre-wrap;"></span><br>
-        <strong>password</strong>
-        <span data-bind="text: item()['password']" style="white-space: pre-wrap;"></span><br>
-        <strong>url</strong>
-        <span data-bind="text: item()['url']" style="white-space: pre-wrap;"></span><br>
-        <strong>username</strong>
-        <span data-bind="text: item()['username']" style="white-space: pre-wrap;"></span><br>
+        <div data-bind="with: item">
+            <c-sharp params="url: url, auth: auth, username: username, password: password"></c-sharp>
         </div>
     </div>
-    <div class="card-action">
-        <a class="waves-effect waves-light btn cyan" data-bind="click: trigger.bind($data, 'event-edit-camera')">edit</a>
-    </div>
+</div>
+ <div class="fixed-action-btn">
+    <a class="btn-floating btn-large red waves-effect waves-light red" data-bind="click: trigger.bind($data, 'event-edit-camera')">
+        <i class="large material-icons">edit</i>
+    </a>
 </div>
