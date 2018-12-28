@@ -1,19 +1,18 @@
 <ul class="collection with-header z-depth-1">
     <li class="collection-header cyan"><h5 class="white-text light">Camera</h5></li>
+    
     <!-- ko foreach: items -->
-    <li class="collection-item" data-bind="click: $parent.select">
-        <strong>auth</strong>
-        <span data-bind="text: $data['auth']" style="white-space: pre-wrap;"></span><br>
-        <strong>name</strong>
-        <span data-bind="text: $data['name']" style="white-space: pre-wrap;"></span><br>
-        <strong>password</strong>
-        <span data-bind="text: $data['password']" style="white-space: pre-wrap;"></span><br>
-        <strong>url</strong>
-        <span data-bind="text: $data['url']" style="white-space: pre-wrap;"></span><br>
-        <strong>username</strong>
-        <span data-bind="text: $data['username']" style="white-space: pre-wrap;"></span><br>
-        <br>
-            <c-system-event-selected-camera params="trigger: $parent.trigger.bind($data, 'system-event-selected-camera')"></c-system-event-selected-camera>
-    </li>
+    <!-- ko if: $index() % 3 == 0 -->
+        <div class="row">
     <!-- /ko -->
+            <div class="col s4" data-bind="click: $parent.select">
+        <c-sharp params="url: $data['url'], auth: $data['auth'], username: $data['username'], password: $data['password']"></c-sharp>
+   
+            <c-system-event-selected-camera params="trigger: $parent.trigger.bind($data, 'system-event-selected-camera')"></c-system-event-selected-camera>
+            </div>
+    <!-- ko if: $index() % 3 != 0 -->
+        </div>
+    <!-- /ko -->
+    <!-- /ko -->
+    
 </ul>

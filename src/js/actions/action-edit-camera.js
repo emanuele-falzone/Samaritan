@@ -3,14 +3,11 @@
 
 var Promise = require('bluebird');
 
-function Action() { // add "options" parameters if needed
-    // TODO: Global Initialization
-    /*
-    example:
-    this.collection = options.repositories.mail;
-    */
+function Action(options) {
+    this.collection = options.repositories.camera;
 }
-Action.prototype.run = function (parameters, solve) { // add "onCancel" parameters if needed
+
+Action.prototype.run = function (parameters, solve) {
     // Parameters:
     // parameters['auth']
     // parameters['id']
@@ -19,21 +16,16 @@ Action.prototype.run = function (parameters, solve) { // add "onCancel" paramete
     // parameters['url']
     // parameters['username']
 
-    // TODO: Execution
-    /*
-    example:
-    mail.find({subject: 'Re: ' + data.subject})
-        .then(solve);
-    */
-    // THIS CAN BE REMOVED (BEGIN)
-    Materialize.toast('Edit Camera', 2000)
-    solve({
-        event: 'event-edit-camera-done', // done
-        data: {
-            'id': parameters['id'],
-        }
-    });
-    // THIS CAN BE REMOVED (END)
+    this.collection.update(parameters)
+        .then(function () {
+            Materialize.toast('Edit Camera', 2000);
+            solve({
+                event: 'event-edit-camera-done', // done
+                data: {
+                    'id': parameters['id'],
+                }
+            });
+        })
 };
 
 exports.createAction = function (options) {
@@ -45,3 +37,4 @@ exports.createAction = function (options) {
         });
     };
 };
+

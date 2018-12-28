@@ -5,6 +5,7 @@ var ko = require('knockout');
 
 exports.register = function () {
     require('./main-application').register();
+    require('./c-sharp').register();
     require('./c-view-container-camera-details').register();
     require('./c-view-container-edit-camera').register();
     require('./c-view-container-home').register();

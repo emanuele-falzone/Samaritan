@@ -9,29 +9,31 @@ function Repository(options) {
         return new Repository(options);
     }
 
-    // TODO: initialization
-
-    // TODO: remove this BEGIN
     this.db = Promise.promisifyAll(new DataStore({
         filename: 'camera',
         inMemoryOnly: true
     }));
     this.db.insert(require('./default'));
-    // TODO: remove this END
 }
 
 Repository.prototype.findById = function (id) {
-    // TODO: implement the accessor to the datasource which returns a promise
-    // TODO: remove this BEGIN
     return this.db.findOneAsync({id: id});
-    // TODO: remove this END
 };
 
 Repository.prototype.find = function (fields, project) {
-    // TODO: implement the accessor to the datasource which returns a promise
-    // TODO: remove this BEGIN
     return this.db.findAsync(fields, project);
-    // TODO: remove this END
+};
+
+Repository.prototype.insert = function (fields) {
+    return this.db.insertAsync(fields);
+};
+
+Repository.prototype.update = function (fields) {
+    return this.db.updateAsync({id: fields.id}, fields, {});
+};
+
+Repository.prototype.remove = function (id) {
+    return this.db.removeAsync({id: id}, {});
 };
 
 exports.createRepository = Repository;
