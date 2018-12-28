@@ -1,0 +1,12 @@
+{
+  "id": "com.samaritan.app",
+  "version": "0.0.1",
+  "vendor": "Emanuele Falzone",
+  "type": "web",
+  "main": "www/index.html",
+  "title": "Samaritan",
+  "icon": "icon.png",
+  "largeIcon": "largeIcon.png",
+  "iconColor": "white",
+  "bgImage": "splash.png"
+}
