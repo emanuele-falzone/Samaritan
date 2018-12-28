@@ -1,0 +1,22 @@
+<ul class="side-nav" id="landmarks">
+</ul>
+<div class="navbar-fixed">
+    <nav class="cyan darken-1">
+        <div class="nav-wrapper">
+            <a href="#" data-activates="landmarks" class="button-collapse"><i class="material-icons tiny">menu</i></a>
+        </div>
+    </nav>
+</div>
+<div class="container">
+    <div class="row">
+        <span data-bind="if: active() === 'view-container-camera-details'">
+            <c-view-container-camera-details params="context: context" class="container"></c-view-container-camera-details>
+        </span>
+        <span data-bind="if: active() === 'view-container-edit-camera'">
+            <c-view-container-edit-camera params="context: context" class="container"></c-view-container-edit-camera>
+        </span>
+        <span data-bind="if: active() === 'view-container-home'">
+            <c-view-container-home params="context: context" class="container"></c-view-container-home>
+        </span>
+    </div>
+</div>

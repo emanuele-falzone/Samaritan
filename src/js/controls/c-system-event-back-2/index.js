@@ -1,0 +1,47 @@
+/*jslint node: true, nomen: true */
+"use strict";
+
+var ko = require('knockout');
+
+function ViewModel(params) {
+    var self = this;
+
+    // TODO: Setup everything needed to start listening for the event
+    /*
+    example:
+    // let's trigger after 1 second
+    self.timer = setInterval(function(){
+        params.trigger();
+    }, 1000);
+    */
+
+    self.context = params.context;
+
+    self.trigger = params.trigger;
+}
+
+ViewModel.prototype.dispose = function() {
+  // TODO: Teardown everything you setup to listen for the event
+  /*
+  example [continue]:
+  clearInterval(this.timer);
+  */
+}
+
+ViewModel.prototype.id = 'system-event-back-2';
+
+exports.register = function () {
+    ko.components.register('c-system-event-back-2', {
+        viewModel: {
+            createViewModel: function (params, componentInfo) {
+                var vm = new ViewModel(params);
+                ko.utils.domNodeDisposal.addDisposeCallback(componentInfo.element, function () {
+                    vm.dispose();
+                });
+                return vm;
+            }
+        },
+        template: require('./index.html'),
+        synchronous: true
+    });
+};
