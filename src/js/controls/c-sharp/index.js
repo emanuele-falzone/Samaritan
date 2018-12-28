@@ -6,18 +6,19 @@ function ViewModel(params) {
     var self = this;
 
     self.url = params.url;
-    self.user = params.user;
-    self.pwd = params.pwd;
+    self.auth = params.auth;
+    self.username = params.username;
+    self.password = params.password;
 
-    self.src = ko.observable();
+    self.src = ko.observable('images/noimage.png');
 
-    function getSnapAsync(callback, url, user, pwd) {
+    function getSnapAsync(callback, url, auth, username, password) {
         var xhr = new XMLHttpRequest();
         xhr.open('GET', url, true);
         xhr.responseType = 'arraybuffer';
 
-        if (user && pwd) {
-            xhr.setRequestHeader('Authorization', 'Basic ' + btoa(user + ':' + pwd));
+        if (auth) {
+            xhr.setRequestHeader('Authorization', 'Basic ' + btoa(username + ':' + password));
         }
 
         xhr.onload = function(e) {
@@ -36,12 +37,13 @@ function ViewModel(params) {
 
         xhr.send();
     }
-
-    setInterval(function() {
-        getSnapAsync(function(base64) {
-            self.src('data:image/jpeg;base64,' + base64);
-        }, self.url, self.user, self.pwd);
-    }, 1000);
+    if(self.url != "") {
+        setInterval(function() {
+            getSnapAsync(function(base64) {
+                self.src('data:image/jpeg;base64,' + base64);
+            }, self.url, self.auth, self.username, self.password);
+        }, 1000);
+    }
 }
 
 exports.register = function(options){
