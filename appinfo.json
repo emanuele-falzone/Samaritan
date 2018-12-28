@@ -8,5 +8,7 @@
   "icon": "icon.png",
   "largeIcon": "largeIcon.png",
   "iconColor": "white",
-  "bgImage": "splash.png"
+  "bgColor": "white",
+  "splashBackground": "splash.png",
+  "disableBackHistoryAPI":true
 }
