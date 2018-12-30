@@ -2,82 +2,82 @@
     {
         "_id": 1,
         "id": "1",
-        "url": "http://192.168.178.40/web/tmpfs/snap.jpg",
-        "name": "Cucina",
-        "auth": true,
-        "username": "admin",
-        "password": "admin"
+        "url": "",
+        "name": "Camera 1",
+        "auth": false,
+        "username": "",
+        "password": ""
     },
     {
         "_id": 2,
         "id": "2",
-        "url": "http://192.168.178.21:81/snapshot.cgi?user=admin&pwd=admin",
-        "name": "Interna",
-        "auth": true,
-        "username": "admin",
-        "password": "admin"
+        "url": "",
+        "name": "Camera 2",
+        "auth": false,
+        "username": "",
+        "password": ""
     },
     {
         "_id": 3,
         "id": "3",
-        "url": "http://192.168.178.21:81/snapshot.cgi?user=admin&pwd=admin",
+        "url": "",
         "name": "Camera 3",
         "auth": false,
-        "username": "admin",
-        "password": "admin"
+        "username": "",
+        "password": ""
     },
     {
         "_id": 4,
         "id": "4",
-        "url": "http://192.168.178.21:81/snapshot.cgi?user=admin&pwd=admin",
+        "url": "",
         "name": "Camera 4",
         "auth": false,
-        "username": "admin",
-        "password": "admin"
+        "username": "",
+        "password": ""
     },
     {
         "_id": 5,
         "id": "5",
-        "url": "http://192.168.178.21:81/snapshot.cgi?user=admin&pwd=admin",
+        "url": "",
         "name": "Camera 5",
         "auth": false,
-        "username": "admin",
-        "password": "admin"
+        "username": "",
+        "password": ""
     },
     {
         "_id": 6,
         "id": "6",
-        "url": "http://192.168.178.21:81/snapshot.cgi?user=admin&pwd=admin",
+        "url": "",
         "name": "Camera 6",
         "auth": false,
-        "username": "admin",
-        "password": "admin"
+        "username": "",
+        "password": ""
     },
     {
         "_id": 7,
         "id": "7",
-        "url": "http://192.168.178.21:81/snapshot.cgi?user=admin&pwd=admin",
+        "url": "",
         "name": "Camera 7",
         "auth": false,
-        "username": "admin",
-        "password": "admin"
+        "username": "",
+        "password": ""
     },
     {
         "_id": 8,
         "id": "8",
-        "url": "http://192.168.178.21:81/snapshot.cgi?user=admin&pwd=admin",
+        "url": "",
         "name": "Camera 8",
         "auth": false,
-        "username": "admin",
-        "password": "admin"
+        "username": "",
+        "password": ""
     },
     {
         "_id": 9,
         "id": "9",
-        "url": "http://192.168.178.21:81/snapshot.cgi?user=admin&pwd=admin",
+        "url": "",
         "name": "Camera 9",
         "auth": false,
-        "username": "admin",
-        "password": "admin"
+        "username": "",
+        "password": ""
     },
 ]

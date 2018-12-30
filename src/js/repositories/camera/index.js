@@ -9,31 +9,57 @@ function Repository(options) {
         return new Repository(options);
     }
 
+    var self = this;
+
     this.db = Promise.promisifyAll(new DataStore({
         filename: 'camera',
-        inMemoryOnly: true
+        autoload: true
     }));
-    this.db.insert(require('./default'));
 }
 
+Repository.prototype.check = function () {
+    var self = this;
+    return this.db.countAsync({})
+        .then(function (count) {
+            if (count == 0) {
+                return self.db.insertAsync(require('./default'));
+            }
+        });
+};
+
 Repository.prototype.findById = function (id) {
-    return this.db.findOneAsync({id: id});
+    var self = this;
+    return this.check().then(function(){
+        return self.db.findOneAsync({id: id});
+    });
 };
 
 Repository.prototype.find = function (fields, project) {
-    return this.db.findAsync(fields, project);
+    var self = this;
+    return this.check().then(function(){
+        return self.db.findAsync(fields, project);
+    });
 };
 
 Repository.prototype.insert = function (fields) {
-    return this.db.insertAsync(fields);
+    var self = this;
+    return this.check().then(function(){
+        return self.db.insertAsync(fields);
+    });
 };
 
 Repository.prototype.update = function (fields) {
-    return this.db.updateAsync({id: fields.id}, fields, {});
+    var self = this;
+    return this.check().then(function(){
+        return self.db.updateAsync({id: fields.id}, fields, {});
+    });
 };
 
 Repository.prototype.remove = function (id) {
-    return this.db.removeAsync({id: id}, {});
+    var self = this;
+    return this.check().then(function(){
+        return self.db.removeAsync({id: id}, {});
+    });
 };
 
 exports.createRepository = Repository;
