@@ -2,6 +2,7 @@
 "use strict";
 
 var ko = require('knockout'),
+    $ = require('jquery'),
     Promise = require('bluebird');
 
 function ViewModel(params) {
@@ -21,6 +22,65 @@ function ViewModel(params) {
     self.trigger = function (id) {
         self.context.navigations[id](self.context, this);
     };
+
+    self.focus = -1;
+
+    self.listener = function(inEvent){
+        // Handling keydown Event
+        var keycode;
+
+        if(window.event) { 
+            keycode = inEvent.keyCode;
+        } else if(e.which) { 
+            keycode = inEvent.which;
+        } 
+
+        if(self.focus == -1 && keycode >= 37 && keycode <= 40) {
+            self.focus = 0;
+            $(".move")[self.focus].focus();
+        } else {
+
+            // ARROW RIGHT
+            if (keycode == 39) { 
+                if (self.focus % 3 < 2) {
+                    self.focus++;
+                    $(".move")[self.focus].focus();
+                }
+            }
+
+            // ARROW LEFT
+            if (keycode == 37) {      
+                if (self.focus % 3 > 0) {
+                    self.focus--;
+                    $(".move")[self.focus].focus();
+                }
+            }
+
+            // ARROW up
+            if (keycode == 38) {  
+                if (self.focus > 2) {
+                    self.focus-=3;
+                    $(".move")[self.focus].focus();
+                }
+            }
+
+            // ARROW DOWN
+            if (keycode == 40) {      
+                if (self.focus < 6) {
+                    self.focus+=3;
+                    $(".move")[self.focus].focus();
+                }
+            }
+
+            // ENTER / OK
+            if (keycode == 13) {      
+                $(".move:focus").click();
+            }
+
+        }
+    };
+
+    document.addEventListener("keydown", self.listener, false);
 }
 
 ViewModel.prototype.id = 'list-camera';
@@ -33,6 +93,10 @@ ViewModel.prototype.fields = {
     ,'url': 1
     ,'username': 1
 };
+
+ViewModel.prototype.dispose = function() {
+    document.removeEventListener("keydown", this.listener, false);
+}
 
 ViewModel.prototype.waitForStatusChange = function () {
     return this._computing ||
@@ -80,7 +144,10 @@ exports.register = function () {
             createViewModel: function (params, componentInfo) {
                 var vm = new ViewModel(params);
                 params.context.vms[vm.id] = vm;
-                ko.utils.domNodeDisposal.addDisposeCallback(componentInfo.element, function () { delete params.context.vms[vm.id]; });
+                ko.utils.domNodeDisposal.addDisposeCallback(componentInfo.element, function () { 
+                    vm.dispose();
+                    delete params.context.vms[vm.id]; 
+                });
                 return vm;
             }
         },

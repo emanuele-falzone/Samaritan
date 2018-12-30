@@ -14,6 +14,55 @@ function ViewModel(params) {
     self.trigger = function (id) {
         self.context.navigations[id](self.context, self.output);
     };
+
+    self.focus = -1;
+
+    self.listener = function(inEvent){
+        // Handling keydown Event
+        var keycode;
+
+        if(window.event) { 
+            keycode = inEvent.keyCode;
+        } else if(e.which) { 
+            keycode = inEvent.which;
+        } 
+
+        if(self.focus == -1 && keycode >= 37 && keycode <= 40) {
+            self.focus = 0;
+            $(".move")[self.focus].focus();
+        } else {
+
+            // ARROW RIGHT OR DOWN
+            if (keycode == 39 || keycode == 40) {
+                var len = $(".move").length;
+                if (self.focus >= len - 1) {
+                    self.focus = 0;
+                } else {
+                    self.focus++;
+                }
+                $(".move")[self.focus].focus();
+            }
+
+            // ARROW LEFT OR UP
+            if (keycode == 37 || keycode == 38) { 
+                var len = $(".move").length;
+                if (self.focus == 0) {
+                    self.focus = len - 1;
+                } else {
+                    self.focus--;
+                }
+                $(".move")[self.focus].focus();
+            }
+
+            // ENTER / OK
+            if (keycode == 13) {      
+                $(".move:focus").click();
+            }
+
+        }
+    };
+
+    document.addEventListener("keydown", self.listener, false);
 }
 
 ViewModel.prototype.id = 'form-edit-camera';
@@ -22,6 +71,10 @@ ViewModel.prototype.waitForStatusChange = function () {
     return this._initializing ||
            Promise.resolve();
 };
+
+ViewModel.prototype.dispose = function() {
+    document.removeEventListener("keydown", this.listener, false);
+}
 
 ViewModel.prototype._compute = function () {
     this.output = {
@@ -51,7 +104,7 @@ ViewModel.prototype._compute = function () {
         };
     fields['auth'].subscribe(function (value) {
         self.output['auth'] = value;
-        self.errors()['auth'](undefined);
+        //self.errors()['auth'](undefined);
     });
     fields['id'].subscribe(function (value) {
         self.output['id'] = value;
@@ -102,7 +155,10 @@ exports.register = function () {
             createViewModel: function (params, componentInfo) {
                 var vm = new ViewModel(params);
                 params.context.vms[vm.id] = vm;
-                ko.utils.domNodeDisposal.addDisposeCallback(componentInfo.element, function () { delete params.context.vms[vm.id]; });
+                ko.utils.domNodeDisposal.addDisposeCallback(componentInfo.element, function () { 
+                    vm.dispose();
+                    delete params.context.vms[vm.id]; 
+                });
                 return vm;
             }
         },

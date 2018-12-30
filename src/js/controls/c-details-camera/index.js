@@ -2,6 +2,7 @@
 "use strict";
 
 var ko = require('knockout'),
+    $ = require('jquery'),
     Promise = require('bluebird');
 
 function ViewModel(params) {
@@ -14,9 +15,37 @@ function ViewModel(params) {
     self.trigger = function (id) {
         self.context.navigations[id](self.context, self.item());
     };
+
+    self.listener = function(inEvent){
+        // Handling keydown Event
+        var keycode;
+
+        if(window.event) { 
+            keycode = inEvent.keyCode;
+        } else if(e.which) { 
+            keycode = inEvent.which;
+        } 
+
+        // ONE OF THE ARROWS
+        if(keycode >= 37 && keycode <= 40) {
+            $("#btn").focus();
+        }
+
+        // ENTER / OK
+        if (keycode == 13) {      
+            $(".move:focus").click();
+        }
+
+    };
+
+    document.addEventListener("keydown", self.listener, false);
 }
 
 ViewModel.prototype.id = 'details-camera';
+
+ViewModel.prototype.dispose = function() {
+    document.removeEventListener("keydown", this.listener, false);
+}
 
 ViewModel.prototype.fields = {
     id: 1
@@ -69,7 +98,10 @@ exports.register = function () {
             createViewModel: function (params, componentInfo) {
                 var vm = new ViewModel(params);
                 params.context.vms[vm.id] = vm;
-                ko.utils.domNodeDisposal.addDisposeCallback(componentInfo.element, function () { delete params.context.vms[vm.id]; });
+                ko.utils.domNodeDisposal.addDisposeCallback(componentInfo.element, function () { 
+                    vm.dispose();
+                    delete params.context.vms[vm.id]; 
+                });
                 return vm;
             }
         },

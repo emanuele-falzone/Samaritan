@@ -1,55 +1,40 @@
 <div class="card z-depth-1">
-    <div class="card-image">
-        <ul class="card-image collection with-header">
-            <li class="collection-header cyan">
-                <h5 class="white-text light">Camera Details</h5>
-            </li>
-        </ul>
-    </div>
     <div class="card-content">
         <div data-bind="if: fields">
             <form>
                 <div class="row">
                     <div class="input-field col s12">
-                      <input id="form-edit-camera_field_0" data-bind="value: fields()['auth'], css: {invalid: errors()['auth']}" type="text" class="validate">
-                      <label for="form-edit-camera_field_0" data-bind="css: {active: fields()['auth']}, attr: {'data-error': errors()['auth']}">auth</label>
+                      <input id="form-edit-camera_field_4" data-bind="value: fields()['url'], css: {invalid: errors()['url']}" type="text" class="validate move">
+                      <label for="form-edit-camera_field_4" data-bind="css: {active: fields()['url']}, attr: {'data-error': errors()['url']}">Snapshot URL</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col s12">
+                      <input id="form-edit-camera_field_0" data-bind="checked: fields()['auth'], css: {invalid: errors()['auth']}" type="checkbox" class="validate move">
+                      <label for="form-edit-camera_field_0" data-bind="css: {active: fields()['auth']}, attr: {'data-error': errors()['auth']}">Basic Authentication</label>
+                    </div>
+                </div>
+                <!-- ko if: fields()['auth'] -->
+                <div class="row">
+                    <div class="input-field col s12">
+                      <input id="form-edit-camera_field_5" data-bind="value: fields()['username'], css: {invalid: errors()['username']}" type="text" class="validate move">
+                      <label for="form-edit-camera_field_5" data-bind="css: {active: fields()['username']}, attr: {'data-error': errors()['username']}">Username</label>
                     </div>
                 </div>
                 <div class="row">
                     <div class="input-field col s12">
-                      <input id="form-edit-camera_field_1" data-bind="value: fields()['id'], css: {invalid: errors()['id']}" type="text" class="validate">
-                      <label for="form-edit-camera_field_1" data-bind="css: {active: fields()['id']}, attr: {'data-error': errors()['id']}">id</label>
+                      <input id="form-edit-camera_field_3" data-bind="value: fields()['password'], css: {invalid: errors()['password']}" type="password" class="validate move">
+                      <label for="form-edit-camera_field_3" data-bind="css: {active: fields()['password']}, attr: {'data-error': errors()['password']}">Password</label>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="input-field col s12">
-                      <input id="form-edit-camera_field_2" data-bind="value: fields()['name'], css: {invalid: errors()['name']}" type="text" class="validate">
-                      <label for="form-edit-camera_field_2" data-bind="css: {active: fields()['name']}, attr: {'data-error': errors()['name']}">name</label>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="input-field col s12">
-                      <input id="form-edit-camera_field_3" data-bind="value: fields()['password'], css: {invalid: errors()['password']}" type="text" class="validate">
-                      <label for="form-edit-camera_field_3" data-bind="css: {active: fields()['password']}, attr: {'data-error': errors()['password']}">password</label>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="input-field col s12">
-                      <input id="form-edit-camera_field_4" data-bind="value: fields()['url'], css: {invalid: errors()['url']}" type="text" class="validate">
-                      <label for="form-edit-camera_field_4" data-bind="css: {active: fields()['url']}, attr: {'data-error': errors()['url']}">url</label>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="input-field col s12">
-                      <input id="form-edit-camera_field_5" data-bind="value: fields()['username'], css: {invalid: errors()['username']}" type="text" class="validate">
-                      <label for="form-edit-camera_field_5" data-bind="css: {active: fields()['username']}, attr: {'data-error': errors()['username']}">username</label>
-                    </div>
-                </div>
+                <!-- /ko -->
             </form>
         </div>
     </div>
-    <div class="card-action">
-        <c-system-event-back-3 params="trigger: trigger.bind($data,'system-event-back-3')"></c-system-event-back-3>
-        <a class="waves-effect waves-light btn cyan" data-bind="click: trigger.bind($data, 'event-edit-camera-save')">save</a>
-    </div>
+    <c-system-event-back-3 params="trigger: trigger.bind($data,'system-event-back-3')"></c-system-event-back-3>
+</div>
+<div class="fixed-action-btn">
+    <a id="btn" tabindex="0" class="btn-floating btn-large red waves-effect waves-light green move" data-bind="click: trigger.bind($data, 'event-edit-camera-save')">
+        <i class="large material-icons">save</i>
+    </a>
 </div>

@@ -4,7 +4,7 @@
     <!-- ko if: $index() % 3 == 0 -->
     <div class="row">
     <!-- /ko -->
-        <div class="col s4" data-bind="click: $parent.select">
+        <div class="col s4 move" data-bind="click: $parent.select" tabindex="0">
             <c-sharp params="url: $data['url'], auth: $data['auth'], username: $data['username'], password: $data['password']"></c-sharp>
             <c-system-event-selected-camera params="index: $index, trigger: $parent.trigger.bind($data, 'system-event-selected-camera')"></c-system-event-selected-camera>
         </div>
