@@ -18,7 +18,7 @@ Action.prototype.run = function (parameters, solve) {
 
     this.collection.update(parameters)
         .then(function () {
-            Materialize.toast('Edit Camera', 2000);
+            //Materialize.toast('Edit Camera', 2000);
             solve({
                 event: 'event-edit-camera-done', // done
                 data: {
