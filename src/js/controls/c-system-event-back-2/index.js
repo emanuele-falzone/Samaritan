@@ -19,7 +19,7 @@ function ViewModel(params) {
         } else if(e.which) { 
             keycode = inEvent.which;
         } 
-        if (keycode == 461) {
+        if (keycode == 461 || keycode == 27) {
             self.trigger();
         }
     };
